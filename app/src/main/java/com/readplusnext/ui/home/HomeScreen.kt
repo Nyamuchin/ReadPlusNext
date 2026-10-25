@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,8 +16,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyRow
@@ -179,9 +178,26 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.statusBars),
+                .windowInsetsPadding(WindowInsets.safeDrawing),
         ) {
-            HomeHeader(onOpenSettings = onOpenSettings)
+            HomeTopBar(
+                onImport = {
+                    if (state.selectedTab == HomeTab.COMIC) {
+                        comicPicker.launch(ComicMimeTypes)
+                    } else {
+                        videoPicker.launch(VideoMimeTypes)
+                    }
+                },
+                onImportFolder = {
+                    if (state.selectedTab == HomeTab.COMIC) {
+                        comicFolderPicker.launch(null)
+                    } else {
+                        videoFolderPicker.launch(null)
+                    }
+                },
+                onLayout = { showColumnsSheet = true },
+                onSettings = onOpenSettings,
+            )
             TabSwitcher(
                 selected = state.selectedTab,
                 onSelect = viewModel::selectTab,
@@ -237,30 +253,8 @@ fun HomeScreen(
             hostState = snackbarHostState,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(horizontal = 24.dp, vertical = 96.dp),
-        )
-
-        HomeBottomBar(
-            onImport = {
-                if (state.selectedTab == HomeTab.COMIC) {
-                    comicPicker.launch(ComicMimeTypes)
-                } else {
-                    videoPicker.launch(VideoMimeTypes)
-                }
-            },
-            onImportFolder = {
-                if (state.selectedTab == HomeTab.COMIC) {
-                    comicFolderPicker.launch(null)
-                } else {
-                    videoFolderPicker.launch(null)
-                }
-            },
-            onLayout = { showColumnsSheet = true },
-            onSettings = onOpenSettings,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
                 .navigationBarsPadding()
-                .padding(bottom = 16.dp),
+                .padding(horizontal = 24.dp, vertical = 24.dp),
         )
     }
 
@@ -303,30 +297,39 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun HomeHeader(onOpenSettings: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 20.dp, end = 8.dp, top = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
+private fun HomeTopBar(
+    onImport: () -> Unit,
+    onImportFolder: () -> Unit,
+    onLayout: () -> Unit,
+    onSettings: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 6.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        HorizontalFloatingToolbar(
+            expanded = true,
+            floatingActionButton = {
+                FloatingToolbarDefaults.StandardFloatingActionButton(onClick = onImport) {
+                    Icon(Icons.Outlined.Add, contentDescription = "导入")
+                }
+            },
         ) {
-            Text(
-                text = "ReadPlusNext",
-                style = MaterialTheme.typography.displaySmall,
-                modifier = Modifier.weight(1f),
-            )
-            IconButton(onClick = onOpenSettings) {
+            IconButton(onClick = onImportFolder) {
+                Icon(Icons.Outlined.CreateNewFolder, contentDescription = "从文件夹导入")
+            }
+            IconButton(onClick = onLayout) {
+                Icon(Icons.Outlined.GridView, contentDescription = "首页布局")
+            }
+            IconButton(onClick = onSettings) {
                 Icon(Icons.Outlined.Settings, contentDescription = "设置")
             }
         }
-        Text(
-            text = "本地漫画与视频库",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(start = 20.dp, top = 2.dp, bottom = 14.dp),
-        )
     }
 }
 
@@ -363,36 +366,6 @@ private fun TabSwitcher(
                     style = MaterialTheme.typography.titleSmall,
                 )
             }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-private fun HomeBottomBar(
-    onImport: () -> Unit,
-    onImportFolder: () -> Unit,
-    onLayout: () -> Unit,
-    onSettings: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    HorizontalFloatingToolbar(
-        expanded = true,
-        floatingActionButton = {
-            FloatingToolbarDefaults.StandardFloatingActionButton(onClick = onImport) {
-                Icon(Icons.Outlined.Add, contentDescription = "导入")
-            }
-        },
-        modifier = modifier,
-    ) {
-        IconButton(onClick = onImportFolder) {
-            Icon(Icons.Outlined.CreateNewFolder, contentDescription = "从文件夹导入")
-        }
-        IconButton(onClick = onLayout) {
-            Icon(Icons.Outlined.GridView, contentDescription = "首页布局")
-        }
-        IconButton(onClick = onSettings) {
-            Icon(Icons.Outlined.Settings, contentDescription = "设置")
         }
     }
 }

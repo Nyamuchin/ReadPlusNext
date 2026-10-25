@@ -45,7 +45,7 @@ fun <T> MediaGrid(
     onLongClick: (T) -> Unit,
     modifier: Modifier = Modifier,
     coverModifier: @Composable (T) -> Modifier = { Modifier },
-    contentPadding: PaddingValues = PaddingValues(start = 20.dp, top = 12.dp, end = 20.dp, bottom = 132.dp),
+    contentPadding: PaddingValues = PaddingValues(start = 20.dp, top = 12.dp, end = 20.dp, bottom = 24.dp),
     emptyContent: @Composable () -> Unit = {},
 ) {
     if (items.isEmpty()) {
