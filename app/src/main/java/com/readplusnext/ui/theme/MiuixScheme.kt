@@ -1,0 +1,86 @@
+package com.readplusnext.ui.theme
+
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.ui.graphics.Color
+
+/**
+ * HyperOS inspired alternative palette (the "Miuix" theme style). Neutral
+ * surfaces with a bright azure accent; shapes stay in the expressive scale but
+ * the theme intentionally avoids Material dynamic color.
+ */
+internal val MiuixLightColorScheme = lightColorScheme(
+    primary = Color(0xFF2E6BE6),
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFFDDE6FF),
+    onPrimaryContainer = Color(0xFF00174A),
+    secondary = Color(0xFF474F62),
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFFE4E8F3),
+    onSecondaryContainer = Color(0xFF141B2B),
+    tertiary = Color(0xFF7C4DFF),
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFFEDE4FF),
+    onTertiaryContainer = Color(0xFF25005E),
+    background = Color(0xFFF6F7FB),
+    onBackground = Color(0xFF191C22),
+    surface = Color(0xFFF6F7FB),
+    onSurface = Color(0xFF191C22),
+    surfaceVariant = Color(0xFFE1E4EC),
+    onSurfaceVariant = Color(0xFF44474F),
+    surfaceTint = Color(0xFF2E6BE6),
+    inverseSurface = Color(0xFF2E3138),
+    inverseOnSurface = Color(0xFFF0F1F6),
+    error = Color(0xFFC62828),
+    onError = Color(0xFFFFFFFF),
+    errorContainer = Color(0xFFFFDAD6),
+    onErrorContainer = Color(0xFF410002),
+    outline = Color(0xFF74777F),
+    outlineVariant = Color(0xFFC4C6D0),
+    scrim = Color(0xFF000000),
+    surfaceBright = Color(0xFFFFFFFF),
+    surfaceDim = Color(0xFFE2E3E9),
+    surfaceContainerLowest = Color(0xFFFFFFFF),
+    surfaceContainerLow = Color(0xFFF0F2F7),
+    surfaceContainer = Color(0xFFEAECF2),
+    surfaceContainerHigh = Color(0xFFE4E6ED),
+    surfaceContainerHighest = Color(0xFFDEE1E8),
+)
+
+internal val MiuixDarkColorScheme = darkColorScheme(
+    primary = Color(0xFFAFC6FF),
+    onPrimary = Color(0xFF002C6E),
+    primaryContainer = Color(0xFF15419A),
+    onPrimaryContainer = Color(0xFFDDE6FF),
+    secondary = Color(0xFFC0C6D8),
+    onSecondary = Color(0xFF2A303D),
+    secondaryContainer = Color(0xFF3A4150),
+    onSecondaryContainer = Color(0xFFE4E8F3),
+    tertiary = Color(0xFFD0BCFF),
+    onTertiary = Color(0xFF3D0090),
+    tertiaryContainer = Color(0xFF5A1DC0),
+    onTertiaryContainer = Color(0xFFEDE4FF),
+    background = Color(0xFF101217),
+    onBackground = Color(0xFFE3E1E9),
+    surface = Color(0xFF101217),
+    onSurface = Color(0xFFE3E1E9),
+    surfaceVariant = Color(0xFF44474F),
+    onSurfaceVariant = Color(0xFFC4C6D0),
+    surfaceTint = Color(0xFFAFC6FF),
+    inverseSurface = Color(0xFFE3E1E9),
+    inverseOnSurface = Color(0xFF2E3138),
+    error = Color(0xFFFFB4AB),
+    onError = Color(0xFF690005),
+    errorContainer = Color(0xFF93000A),
+    onErrorContainer = Color(0xFFFFDAD6),
+    outline = Color(0xFF8E9099),
+    outlineVariant = Color(0xFF44474F),
+    scrim = Color(0xFF000000),
+    surfaceBright = Color(0xFF363940),
+    surfaceDim = Color(0xFF101217),
+    surfaceContainerLowest = Color(0xFF0B0D11),
+    surfaceContainerLow = Color(0xFF181A20),
+    surfaceContainer = Color(0xFF1C1E24),
+    surfaceContainerHigh = Color(0xFF262930),
+    surfaceContainerHighest = Color(0xFF31343B),
+)
